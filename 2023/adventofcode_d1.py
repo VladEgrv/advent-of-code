@@ -42,17 +42,59 @@ with open('d:\\python\\AOC_input_1.txt', 'r') as file:
 def sum_of_the_calibration_values(all_strings):
     list_of_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     counter = 0
+    
     for string_with_numbers in all_strings:
         temp_sum = ''
+        
         for left_num in string_with_numbers:
             if left_num in list_of_numbers:
                 temp_sum += left_num
                 break
+                
         for right_num in string_with_numbers[::-1]:
             if right_num in list_of_numbers:
                 temp_sum += right_num
                 break
+                
         counter += int(temp_sum)
     print(counter)
 
+def sum_of_the_calibration_values_with_spell(all_strings):
+    counter = 0
+    list_of_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    dict_of_spell = {'one' : '1', 'two' : '2', 'three' : '3', 'four' : '4', 'five' : '5', 'six' : '6', 'seven' : '7', 'eight' : '8', 'nine' : '9'}
+    
+    for string_with_nubmers in all_strings:
+        dict_of_substring_occurences = {}
+        temp_num = ''
+        
+        for number in list_of_numbers:
+            if number in string_with_nubmers:
+                dict_of_substring_occurences[number] = string_with_nubmers.find(number)
+        min_key = min(dict_of_substring_occurences, key=dict_of_substring_occurences.get)
+        result_dict = {min_key: dict_of_substring_occurences[min_key]}
+        
+        for key, value in result_dict.items():
+            if len(key) <= 1:
+                temp_num += key
+            else:
+                temp_num += dict_of_spell.get(key)
+                
+        for number in list_of_numbers:
+            if number in string_with_nubmers:
+                dict_of_substring_occurences[number] = string_with_nubmers.rfind(number)
+                
+        max_key = max(dict_of_substring_occurences, key=dict_of_substring_occurences.get)
+        result_dict = {max_key: dict_of_substring_occurences[max_key]}
+        
+        for key, value in result_dict.items():
+            if len(key) <= 1:
+                temp_num += key
+            else:
+                temp_num += dict_of_spell.get(key)
+                
+        counter += int(temp_num)
+    print(counter)
+
 sum_of_the_calibration_values(all_strings)
+sum_of_the_calibration_values_with_spell(all_strings)
