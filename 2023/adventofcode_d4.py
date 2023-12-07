@@ -54,6 +54,7 @@ Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
 Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
 Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
 Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
+
 Card 1 has four matching numbers, so you win one copy each of the next four cards: cards 2, 3, 4, and 5.
 Your original card 2 has two matching numbers, so you win one copy each of cards 3 and 4.
 Your copy of card 2 also wins one copy each of cards 3 and 4.
@@ -74,6 +75,7 @@ with open('d:\\python\\AOC_input_4.txt', 'r') as file:
     raw_game_list = [line.strip() for line in file.readlines()]
 
 mapped_input = []
+lists_of_numbers = []
 counter = 0
 
 def raw_to_map(raw_game_list, mapped_input):
@@ -89,19 +91,36 @@ def raw_to_map(raw_game_list, mapped_input):
         mapped_input.append(mapped_game)
     return mapped_input
 
+def mapped_input_to_lists(mapped_input, lists_of_numbers):
+    for i in mapped_input:
+        for key, value in i.items():
+            lists_of_numbers.append(value)
+    return(lists_of_numbers)
+
+
 def count_total_points(mapped_input, counter):
     for game in mapped_input:
         temp_counter = 0
         for key, value in game.items():
             for num in value[1]:
                 if num in value[0]:
-                    value[0].remove(num)
                     temp_counter += 1
         if temp_counter == 0: continue
         else:
             counter += 2 ** (temp_counter - 1)
     print(counter)
 
+#def count_won_tickets_with_copies():
+# coming soon
+                
+
+
+
+
+
 raw_to_map(raw_game_list, mapped_input)
+mapped_input_to_lists(mapped_input, lists_of_numbers)
 count_total_points(mapped_input, counter)
+
+
 
