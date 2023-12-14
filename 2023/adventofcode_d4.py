@@ -110,10 +110,15 @@ def count_total_points(mapped_input, counter):
             counter += 2 ** (temp_counter - 1)
     print(counter)
 
-#def count_won_tickets_with_copies():
-# coming soon
-                
+#def count_won_tickets_with_copies(lists_of_numbers, counter):
+    #comingsoon
+        
 
+
+
+
+
+  
 
 
 
@@ -121,6 +126,7 @@ def count_total_points(mapped_input, counter):
 raw_to_map(raw_game_list, mapped_input)
 mapped_input_to_lists(mapped_input, lists_of_numbers)
 count_total_points(mapped_input, counter)
+#count_won_tickets_with_copies(lists_of_numbers, counter)
 
 
 
